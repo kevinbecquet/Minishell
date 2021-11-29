@@ -8,7 +8,7 @@ void get_input(char* input, int taille_max){
   input[strlen(input)-1] = '\0';// o, remplace le retour à la ligne par une fin de chaine
 }
 
-
+/*
 void execute(char** tabchar){
 
   char* argv1[2];
@@ -41,7 +41,7 @@ void execute(char** tabchar){
   }
 
 }
-
+*/
 char** separe(char* input){
 
   //les espaces nous indiquent les séparations entre les differents arguments d'input
