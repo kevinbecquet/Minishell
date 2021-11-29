@@ -10,7 +10,7 @@
 #include <sys/wait.h>
 
 void get_input(char* input, int taille_max);
-void execute(char*input);
+void execute(char** input);
 char** separe(char* input);
 
 

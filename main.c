@@ -5,19 +5,16 @@ int main(int argc, char const *argv[]) {
 
 
 char input[TAILLE_MAX];
-
+char** tabchar = NULL;
 get_input(input,TAILLE_MAX);
-//printf("chaine : %s\n",input );
-execute (input);
-separe(input);
-/*
-char input[100];
-str commands[];
-while(1){
-    input = acquisition();
-    exe_input(input);
-    if( command exit ) break;
+
+tabchar = separe(input);
+printf("______________________\n");
+for(int i = 0; i<10; i++){
+  printf("%s\n",tabchar[i]);
 }
-*/
+
+//execute (input);
+
   return 0;
 }
