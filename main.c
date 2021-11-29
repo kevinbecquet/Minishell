@@ -9,19 +9,13 @@ char input[TAILLE_MAX];
 get_input(input,TAILLE_MAX);
 printf("chaine : %s\n",input );
 
-//  char input[100];
-//  str commands[];
-//
-//
-//  while(1){
-//
-//      input = acquisition();
-//
-//      exe_input(input);
-//
-//
-//      if( command exit ) break;
-//  }
+char input[100];
+str commands[];
+while(1){
+    input = acquisition();
+    exe_input(input);
+    if( command exit ) break;
+}
 
   return 0;
 }
