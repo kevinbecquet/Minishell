@@ -19,8 +19,8 @@ void execute(char*input){
     case 0:
       argv1[0] = input;
       argv1[1] = NULL; // toujours terminer avec NULL
-      strcat("/bin/",argv1[0]);
-      execv(argv1[0],argv1[1]);
+      strcat("/bin/", argv1[0]);
+      execvp(argv1[0], argv1);
       exit(0);
 
     default :

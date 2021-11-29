@@ -8,7 +8,7 @@ char input[TAILLE_MAX];
 
 get_input(input,TAILLE_MAX);
 printf("chaine : %s\n",input );
-
+/*
 char input[100];
 str commands[];
 while(1){
@@ -16,6 +16,6 @@ while(1){
     exe_input(input);
     if( command exit ) break;
 }
-
+*/
   return 0;
 }
