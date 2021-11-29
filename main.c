@@ -5,7 +5,7 @@ int main(int argc, char const *argv[]) {
 
 
 char input[TAILLE_MAX];
-printf("sasir une chaine :\n" );
+
 get_input(input,TAILLE_MAX);
 printf("chaine : %s\n",input );
 
