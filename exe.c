@@ -8,10 +8,9 @@ void get_input(char* input, int taille_max){
   input[strlen(input)-1] = '\0';// o, remplace le retour à la ligne par une fin de chaine
 }
 
-/*
+
 void execute(char** tabchar){
 
-  char* argv1[2];
   char path[TAILLE_MAX];
 
   switch(fork()){
@@ -28,9 +27,9 @@ void execute(char** tabchar){
 
       // creation d'une chaine pour le chemin d'acces
       strcpy(path,"/bin/");
-      strcat(path, argv1[0]);
+      strcat(path, tabchar[0]);
       printf("%s.\n",path );
-      int err = execvp(*tabchar[0], *tabchar);
+      int err = execvp(tabchar[0], tabchar);
       if (err) perror("Error  ");
 
       exit(0);
@@ -41,7 +40,7 @@ void execute(char** tabchar){
   }
 
 }
-*/
+
 char** separe(char* input){
 
   //les espaces nous indiquent les séparations entre les differents arguments d'input
@@ -54,8 +53,11 @@ char** separe(char* input){
     }
     else if(input[i] != ' ') meme_espace = 0;
   }
-  char** tabchar = (char**)malloc(nb_espaces*sizeof(char*));
+  char** tabchar = (char**)malloc((nb_espaces+1)*sizeof(char*));
   for(int i = 0;i<nb_espaces;i++) tabchar[i] = (char*)malloc(10*sizeof(char));
+
+  tabchar[nb_espaces] = NULL;
+
 
   char delimiteur = ' ';//délimiteur pour strtok();
   char* token;//token pour utiliser strtok();
