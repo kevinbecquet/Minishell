@@ -5,11 +5,13 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <unistd.h>
 #include <sys/wait.h>
 
 void get_input(char* input, int taille_max);
-
+void execute(char*input);
+char* separe(char* input);
 
 
 
