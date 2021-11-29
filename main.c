@@ -4,11 +4,10 @@
 int main(int argc, char const *argv[]) {
 
 
-
-test
-
-char input[];
-get_input(input,)
+char input[TAILLE_MAX];
+printf("sasir une chaine :\n" );
+get_input(input,TAILLE_MAX);
+printf("chaine : %s\n",input );
 
 //  char input[100];
 //  str commands[];

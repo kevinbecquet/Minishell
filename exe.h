@@ -1,6 +1,7 @@
 #ifndef EXE_H
 #define EXE_H
 
+#define TAILLE_MAX 100
 
 #include <stdio.h>
 #include <stdlib.h>
