@@ -2,6 +2,7 @@
 #define EXE_H
 
 #define TAILLE_MAX 100
+#define TAILLE_ARGUMENT 10
 
 #include <stdio.h>
 #include <stdlib.h>
