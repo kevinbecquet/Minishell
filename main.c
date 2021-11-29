@@ -3,18 +3,18 @@
 
 int main(int argc, char const *argv[]) {
 
+  while(1){
+    char input[TAILLE_MAX];
+    char** tabchar = NULL;
+    get_input(input,TAILLE_MAX);
 
-char input[TAILLE_MAX];
-char** tabchar = NULL;
-get_input(input,TAILLE_MAX);
+    tabchar = separe(input);
 
-tabchar = separe(input);
-printf("______________________\n");
-for(int i = 0; i<10; i++){
-  printf("%s\n",tabchar[i]);
-}
+    if(!strcmp(tabchar[0],"exit")) break;
+    
+    execute (tabchar);
 
-//execute (input);
+  }
 
   return 0;
 }
