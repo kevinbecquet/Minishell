@@ -28,10 +28,6 @@ void execute(char** tabchar){
       // creation d'une chaine pour le chemin d'acces
       strcpy(path,"/bin/");
       strcat(path, tabchar[0]);
-<<<<<<< HEAD
-      printf("%s.\n",path );
-=======
->>>>>>> d720a2e6c92ce3b3d6d6d54e24530d3298a62b71
       int err = execvp(tabchar[0], tabchar);
       if (err) perror("Error  ");
 
@@ -57,15 +53,7 @@ char** separe(char* input){
     else if(input[i] != ' ') meme_espace = 0;
   }
   char** tabchar = (char**)malloc((nb_espaces+1)*sizeof(char*));
-<<<<<<< HEAD
-  for(int i = 0;i<nb_espaces;i++) tabchar[i] = (char*)malloc(10*sizeof(char));
-=======
   for(int i = 0;i<nb_espaces;i++) tabchar[i] = (char*)malloc(TAILLE_ARGUMENT*sizeof(char));
-
-  tabchar[nb_espaces] = NULL;
-
->>>>>>> d720a2e6c92ce3b3d6d6d54e24530d3298a62b71
-
   tabchar[nb_espaces] = NULL;
 
 
