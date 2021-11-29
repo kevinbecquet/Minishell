@@ -9,7 +9,7 @@ void get_input(char* input, int taille_max){
 }
 
 
-void execute(char*input){
+void execute(char** tabchar){
 
   char* argv1[2];
   char path[TAILLE_MAX];
@@ -23,14 +23,14 @@ void execute(char*input){
     case 0:
 
 
-      argv1[0] = input;
-      argv1[1] = NULL; // toujours terminer avec NULL
+      //argv1[0] = input;
+      //argv1[1] = NULL; // toujours terminer avec NULL
 
       // creation d'une chaine pour le chemin d'acces
       strcpy(path,"/bin/");
       strcat(path, argv1[0]);
       printf("%s.\n",path );
-      int err =execvp(path, argv1);
+      int err = execvp(*tabchar[0], *tabchar);
       if (err) perror("Error  ");
 
       exit(0);
