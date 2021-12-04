@@ -1,7 +1,7 @@
 #include "exe.h"
 
 
-int main(int argc, char const *argv[]) {
+int main(int argc, char *argv[]) {
 
   while(1){
     char input[TAILLE_MAX];
@@ -11,7 +11,7 @@ int main(int argc, char const *argv[]) {
     tabchar = separe(input);
 
     if(!strcmp(tabchar[0],"exit")) break;
-    
+
     execute (tabchar);
 
   }

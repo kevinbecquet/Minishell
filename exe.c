@@ -2,7 +2,7 @@
 
 
 void get_input(char* input, int taille_max){
-  printf("§ ");
+  printf("$ ");
   fgets(input,taille_max,stdin);
 
   input[strlen(input)-1] = '\0';// o, remplace le retour à la ligne par une fin de chaine
