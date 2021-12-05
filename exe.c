@@ -14,31 +14,54 @@ void execute(char** tabchar){
 Cette fonction nous permet d'executer la commande entrées dans le shell préalablement decoupées
 */
 
-  switch(fork()){
+  // Traitement des commandes builtin pwd et cd
 
-    case -1 :
-      puts("Couldn't fork");
-      exit(-1);
+  if(!strcmp(tabchar[0],"pwd")){
+    char path[TAILLE_MAX];
 
-    case 0: // execution dans le processus enfant
+    // affiche le repetoire courant ou l'erreur si impossible
+    if(getcwd(path,TAILLE_MAX))
+       printf("%s\n", path);
 
-      // creation d'une chaine pour le chemin d'acces
-      char path[TAILLE_MAX];
-      strcpy(path,"/bin/");
-      strcat(path, tabchar[0]);
+    else perror("pwd Error");
 
-      //Execution de la commande associée a path
-      int err = execvp(tabchar[0], tabchar);
-      if (err) perror("Error  "); // affiche erreur d'execution
 
-      exit(0);
-
-    default :
-    // processus parent attend la fin de l'execution du processus enfant avant de se fermer
-      wait(NULL);
-      break;
   }
 
+  else if(!strcmp(tabchar[0],"cd")){
+    //  execution de cd + affichage de l'erreur en cas de problème
+    if(chdir(tabchar[1]))
+      perror("cd Error");
+
+  }
+
+  else{
+    //traitement des commandes non builtin
+    switch(fork()){
+
+      case -1 :
+        puts("Couldn't fork");
+        exit(-1);
+
+      case 0: ;// execution dans le processus enfant
+
+        // creation d'une chaine pour le chemin d'acces
+        char path[TAILLE_MAX];
+        strcpy(path,"/bin/");
+        strcat(path, tabchar[0]);
+
+        //Execution de la commande associée a path
+        int err = execvp(tabchar[0], tabchar);
+        if (err) perror("Error  "); // affiche erreur d'execution
+
+        exit(0);
+
+      default :
+      // processus parent attend la fin de l'execution du processus enfant avant de se fermer
+        wait(NULL);
+        break;
+    }
+  }
 }
 
 char** separe(char* input){
@@ -69,4 +92,16 @@ char** separe(char* input){
   }
 
   return tabchar;
+}
+
+void free_tab(char** tab){
+// fonction de desallocation memoir d'un tableau de strings
+
+  int i=0;
+  while(tab[i]){
+    free(tab[i]);
+    i++;
+  }
+
+  free(tab);
 }

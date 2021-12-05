@@ -13,7 +13,7 @@
 void get_input(char* input, int taille_max);
 void execute(char** input);
 char** separe(char* input);
-
+void free_tab(char** tab);
 
 
 #endif
