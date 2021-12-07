@@ -64,21 +64,21 @@ Cette fonction nous permet d'executer la commande entrées dans le shell préala
   }
 }
 
-char** separe(char* input){
+char** separe(char* input,int* nb_espaces){
 
   //les espaces nous indiquent les séparations entre les differents arguments d'input
-  int nb_espaces = 0, meme_espace = 1;
+  int meme_espace = 1;
   for(int i = 1;i<strlen(input);i++){
     if(input[i] == ' ' && !meme_espace){
-       nb_espaces++;
+       nb_espaces++;;
        meme_espace = 1;
     }
     else if(input[i] != ' ') meme_espace = 0;
   }
-  char** tabchar = (char**)malloc((nb_espaces+1)*sizeof(char*));
-  for(int i = 0;i<nb_espaces;i++) tabchar[i] = (char*)malloc(TAILLE_ARGUMENT*sizeof(char));
-  tabchar[nb_espaces] = NULL;
 
+  char** tabchar = (char**)malloc((*nb_espaces+1)*sizeof(char*));
+  for(int i = 0;i<*nb_espaces;i++) tabchar[i] = (char*)malloc(TAILLE_ARGUMENT*sizeof(char));
+  tabchar[*nb_espaces] = NULL;
 
   char delimiteur = ' ';//délimiteur pour strtok();
   char* token;//token pour utiliser strtok();
@@ -93,14 +93,18 @@ char** separe(char* input){
 
   return tabchar;
 }
-
-void free_tab(char** tab){
+void affiche(char** tab){
+  int i = 0;
+  while(tab[i]){
+    printf("%s \n",tab[i]);
+    i++;
+  }
+}
+void free_tab(char** tab, int n){
 // fonction de desallocation memoir d'un tableau de strings
 
-  int i=0;
-  while(tab[i]){
+  for(int i=0;i<n;i++){
     free(tab[i]);
-    i++;
   }
 
   free(tab);

@@ -13,15 +13,18 @@ int main(int argc, char *argv[]) {
     get_input(input,TAILLE_MAX);
 
     // Découpage de la commande en tableau
-    tabchar = separe(input);
+    int n = 0;
+    tabchar = separe(input, &n);
 
     if(!strcmp(tabchar[0],"exit")){
-      free_tab(tabchar);
+      printf("Shell exited\n");
+      free_tab(tabchar,n);
       return 0; // quitte le Minishell en cas d'exit
     }
     // execution des commandes (non exit)
     execute (tabchar);
-    free_tab(tabchar);
+    //affiche(tabchar);
+    free_tab(tabchar,n);
   }
 
   return 0;
