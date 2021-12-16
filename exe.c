@@ -11,7 +11,7 @@ void get_input(char* input, int taille_max){
 
 void execute(char** tabchar){
 /*
-Cette fonction nous permet d'executer la commande entrées dans le shell préalablement decoupées
+Cette fonction nous permet d'executer la commande entrées dans le shell préalablement decoupée
 */
 
   // Traitement des commandes builtin pwd et cd
@@ -76,13 +76,13 @@ char** separe(char* input,int* nb_espaces){
     else if(input[i] != ' ') meme_espace = 0;
   }
 
-  char** tabchar = (char**)malloc((*nb_espaces+1)*sizeof(char*));
+  char** tabchar = (char**)malloc((*nb_espaces+1)*sizeof(char*));//malloc pour créer un tableau de chaines de caractères, une par argument + la commande elle-même
   for(int i = 0;i<*nb_espaces;i++) tabchar[i] = (char*)malloc(TAILLE_ARGUMENT*sizeof(char));
   tabchar[*nb_espaces] = NULL;
 
   char delimiteur = ' ';//délimiteur pour strtok();
   char* token;//token pour utiliser strtok();
-  token = strtok(input,&delimiteur);
+  token = strtok(input,&delimiteur);//strtok -> découpe la chaine en sous-chaines
   int count = 0;//compteur de "mots"
 
   while (token != NULL) {
@@ -93,6 +93,8 @@ char** separe(char* input,int* nb_espaces){
 
   return tabchar;
 }
+
+
 void affiche(char** tab){
   int i = 0;
   while(tab[i]){
