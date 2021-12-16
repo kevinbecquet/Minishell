@@ -24,6 +24,7 @@ int main(int argc, char *argv[]) {
       return 0; // quitte le Minishell en cas d'exit
     }
     // execution des commandes (non exit)
+<<<<<<< HEAD
 
     if(!strcmp(tabchar[nb_espaces],"&")){
       tabchar[nb_espaces] = '\0';
@@ -32,6 +33,18 @@ int main(int argc, char *argv[]) {
     //affiche(tabchar);
     execute (tabchar,arr_plan);
     //printf("pid = %d\n",pid);
+=======
+    /*if (strcmp(tabchar[nb_espaces],"&")){
+      printf("test\n");
+      tabchar[nb_espaces] = '\0';
+    }*/
+    /*printf("%d\n", nb_espaces);
+    for(int i = 0; i<=nb_espaces+1;i++){
+      printf("%s\n", tabchar[i]);
+    }*/
+    //execute (tabchar);
+    affiche(tabchar);
+>>>>>>> cc431d25cf8a272abc5d9412f52d3a74f12ee6c3
     //free_tab(tabchar,nb_espaces);//"double free or corruption"
     free(tabchar);//ça, ça exectute bien, mais est-ce-que ça free bien ? ¯\_(ツ)_/¯
   }
