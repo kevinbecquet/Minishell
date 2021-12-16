@@ -9,7 +9,7 @@ void get_input(char* input, int taille_max){
 }
 
 
-void execute(char** tabchar, int arr_plan){
+void execute(char** tabchar, int arr_plan, int pipe){
 /*
 Cette fonction nous permet d'executer la commande entrées dans le shell préalablement decoupée
 */
