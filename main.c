@@ -18,16 +18,22 @@ int main(int argc, char *argv[]) {
 
     if(!strcmp(tabchar[0],"exit")){
       printf("Shell exited\n");
-      free_tab(tabchar,n);
+      free_tab(tabchar,nb_espaces);
       return 0; // quitte le Minishell en cas d'exit
     }
     // execution des commandes (non exit)
-    if (tabchar[nb_espaces] == "&"){
+    /*if (strcmp(tabchar[nb_espaces],"&")){
       printf("test\n");
-    }
-    execute (tabchar);
-    //affiche(tabchar);
-    free_tab(tabchar,nb_espaces);
+      tabchar[nb_espaces] = '\0';
+    }*/
+    /*printf("%d\n", nb_espaces);
+    for(int i = 0; i<=nb_espaces+1;i++){
+      printf("%s\n", tabchar[i]);
+    }*/
+    //execute (tabchar);
+    affiche(tabchar);
+    //free_tab(tabchar,nb_espaces);//"double free or corruption"
+    free(tabchar);//ça, ça exectute bien, mais est-ce-que ça free bien ? ¯\_(ツ)_/¯
   }
 
   return 0;

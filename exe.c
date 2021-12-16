@@ -64,13 +64,14 @@ Cette fonction nous permet d'executer la commande entrées dans le shell préala
   }
 }
 
-char** separe(char* input,int* nb_espaces){
+char** separe(char* input, int* nb_espaces){
 
   //les espaces nous indiquent les séparations entre les differents arguments d'input
   int meme_espace = 1;
-  for(int i = 1;i<strlen(input);i++){
+  for(int i = 0;i<strlen(input);i++){
     if(input[i] == ' ' && !meme_espace){
-       nb_espaces++;;
+       *nb_espaces = *nb_espaces + 1;// la syntaxe *nb_espaces++ ne marche pas (╯°□°)╯︵ ┻━┻
+       printf("nb d'espaces = %d\n", *nb_espaces);
        meme_espace = 1;
     }
     else if(input[i] != ' ') meme_espace = 0;
