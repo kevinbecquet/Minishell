@@ -9,7 +9,7 @@ void get_input(char* input, int taille_max){
 }
 
 
-void execute(char** tabchar){
+void execute(char** tabchar, int arr_plan){
 /*
 Cette fonction nous permet d'executer la commande entrées dans le shell préalablement decoupée
 */
@@ -37,7 +37,8 @@ Cette fonction nous permet d'executer la commande entrées dans le shell préala
 
   else{
     //traitement des commandes non builtin
-    switch(fork()){
+    int pid = fork();
+    switch(pid){
 
       case -1 :
         puts("Couldn't fork");
@@ -57,20 +58,25 @@ Cette fonction nous permet d'executer la commande entrées dans le shell préala
         exit(0);
 
       default :
-      // processus parent attend la fin de l'execution du processus enfant avant de se fermer
-        wait(NULL);
+      // processus parent attend la fin de l'execution du processus enfant avant de se fermer si on execute en premier plan
+        if(!arr_plan){
+          wait(NULL);
+        }
+        else{//sinon on attends pas et on affiche le pid, comme dans le vrai shell je suppose
+          printf("[1] %d\n",pid);
+        }
         break;
     }
   }
 }
 
-char** separe(char* input,int* nb_espaces){
+char** separe(char* input, int* nb_espaces){
 
   //les espaces nous indiquent les séparations entre les differents arguments d'input
   int meme_espace = 1;
-  for(int i = 1;i<strlen(input);i++){
+  for(int i = 0;i<strlen(input);i++){
     if(input[i] == ' ' && !meme_espace){
-       nb_espaces++;;
+       *nb_espaces = *nb_espaces + 1;// la syntaxe *nb_espaces++ ne marche pas (╯°□°)╯︵ ┻━┻
        meme_espace = 1;
     }
     else if(input[i] != ' ') meme_espace = 0;
@@ -78,7 +84,7 @@ char** separe(char* input,int* nb_espaces){
 
   char** tabchar = (char**)malloc((*nb_espaces+1)*sizeof(char*));//malloc pour créer un tableau de chaines de caractères, une par argument + la commande elle-même
   for(int i = 0;i<*nb_espaces;i++) tabchar[i] = (char*)malloc(TAILLE_ARGUMENT*sizeof(char));
-  tabchar[*nb_espaces] = NULL;
+  tabchar[*(nb_espaces+1)] = NULL;
 
   char delimiteur = ' ';//délimiteur pour strtok();
   char* token;//token pour utiliser strtok();
@@ -90,7 +96,7 @@ char** separe(char* input,int* nb_espaces){
     tabchar[count-1] = token;
     token = strtok(NULL, &delimiteur);
   }
-
+  tabchar[*nb_espaces+1] = '\0';
   return tabchar;
 }
 
@@ -102,6 +108,7 @@ void affiche(char** tab){
     i++;
   }
 }
+
 void free_tab(char** tab, int n){
 // fonction de desallocation memoir d'un tableau de strings
 

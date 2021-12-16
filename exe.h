@@ -11,7 +11,7 @@
 #include <sys/wait.h>
 
 void get_input(char* input, int taille_max);
-void execute(char** input);
+void execute(char** input,int arr_plan);
 char** separe(char* input, int* nb_espaces);
 void free_tab(char** tab, int n);
 void affiche(char** tab);

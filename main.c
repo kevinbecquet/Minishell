@@ -7,6 +7,8 @@ int main(int argc, char *argv[]) {
     // indique que le Minishellest prêt à recevoir une nouvelle commande
     printf("$ ");
 
+    int arr_plan = 0;
+
     //Acquisition de la commande
     char input[TAILLE_MAX];
     char** tabchar = NULL;
@@ -18,16 +20,20 @@ int main(int argc, char *argv[]) {
 
     if(!strcmp(tabchar[0],"exit")){
       printf("Shell exited\n");
-      free_tab(tabchar,n);
+      free_tab(tabchar,nb_espaces);
       return 0; // quitte le Minishell en cas d'exit
     }
     // execution des commandes (non exit)
-    if (tabchar[nb_espaces] == "&"){
-      printf("test\n");
+
+    if(!strcmp(tabchar[nb_espaces],"&")){
+      tabchar[nb_espaces] = '\0';
+      arr_plan = 1;
     }
-    execute (tabchar);
     //affiche(tabchar);
-    free_tab(tabchar,nb_espaces);
+    execute (tabchar,arr_plan);
+    //printf("pid = %d\n",pid);
+    //free_tab(tabchar,nb_espaces);//"double free or corruption"
+    free(tabchar);//ça, ça exectute bien, mais est-ce-que ça free bien ? ¯\_(ツ)_/¯
   }
 
   return 0;
