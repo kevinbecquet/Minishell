@@ -1,8 +1,8 @@
 #ifndef EXE_H
 #define EXE_H
 
-#define TAILLE_MAX 100
-#define TAILLE_ARGUMENT 10
+#define TAILLE_MAX 256
+#define TAILLE_ARGUMENT 100
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -12,8 +12,9 @@
 
 void get_input(char* input, int taille_max);
 void execute(char** input);
-char** separe(char* input);
-
+char** separe(char* input, int* nb_espaces);
+void free_tab(char** tab, int n);
+void affiche(char** tab);
 
 
 #endif
