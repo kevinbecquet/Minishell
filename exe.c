@@ -70,43 +70,48 @@ Cette fonction nous permet d'executer la commande entrées dans le shell préala
   }
 }
 
-char** separe(char* input, int* nb_espaces){
+char** separe(char* input, int* nb_separateurs, char separateur){
 
   //les espaces nous indiquent les séparations entre les differents arguments d'input
-  int meme_espace = 1;
-  for(int i = 0;i<strlen(input);i++){
-    if(input[i] == ' ' && !meme_espace){
-       *nb_espaces = *nb_espaces + 1;// la syntaxe *nb_espaces++ ne marche pas (╯°□°)╯︵ ┻━┻
-       meme_espace = 1;
-    }
-    else if(input[i] != ' ') meme_espace = 0;
-  }
+  compte_separateurs(input,nb_separateurs,separateur);
 
-  char** tabchar = (char**)malloc((*nb_espaces+1)*sizeof(char*));//malloc pour créer un tableau de chaines de caractères, une par argument + la commande elle-même
-  for(int i = 0;i<*nb_espaces;i++) tabchar[i] = (char*)malloc(TAILLE_ARGUMENT*sizeof(char));
-  tabchar[*(nb_espaces+1)] = NULL;
 
-  char delimiteur = ' ';//délimiteur pour strtok();
+  char** tabchar = (char**)malloc((*nb_separateurs+1)*sizeof(char*));//malloc pour créer un tableau de chaines de caractères, une par argument + la commande elle-même
+  for(int i = 0;i<*nb_separateurs;i++) tabchar[i] = (char*)malloc(TAILLE_ARGUMENT*sizeof(char));
+  //tabchar[*(nb_espaces+1)] = NULL;
+
   char* token;//token pour utiliser strtok();
-  token = strtok(input,&delimiteur);//strtok -> découpe la chaine en sous-chaines
+  token = strtok(input,&separateur);//strtok -> découpe la chaine en sous-chaines
   int count = 0;//compteur de "mots"
 
   while (token != NULL) {
     count++;
     tabchar[count-1] = token;
-    token = strtok(NULL, &delimiteur);
+    token = strtok(NULL, &separateur);
   }
-  tabchar[*nb_espaces+1] = '\0';
+  tabchar[*nb_separateurs+1] = '\0';
   return tabchar;
 }
 
+void compte_separateurs(char* input, int* nb_separateurs, char separateur){
+
+  int meme_separateur = 1;
+  for(int i = 0;i<strlen(input);i++){
+    if(input[i] == separateur && !meme_separateur){
+       *nb_separateurs = *nb_separateurs + 1;// la syntaxe *nb_espaces++ ne marche pas (╯°□°)╯︵ ┻━┻
+       meme_separateur = 1;
+    }
+    else if(input[i] != separateur) meme_separateur = 0;
+  }
+}
 
 void affiche(char** tab){
   int i = 0;
   while(tab[i]){
-    printf("%s \n",tab[i]);
+    printf("tab %d = %s \n",i,tab[i]);
     i++;
   }
+  //printf("%s \n",tab[1]);
 }
 
 void free_tab(char** tab, int n){
